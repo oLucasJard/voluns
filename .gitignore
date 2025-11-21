@@ -1,0 +1,75 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+*.test.js.snap
+
+# Next.js
+/.next/
+/out/
+.next
+
+# Production
+/build
+dist
+
+# Misc
+.DS_Store
+*.pem
+.env
+.env*.local
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Sentry
+.sentryclirc
+
+# PWA
+**/public/sw.js
+**/public/workbox-*.js
+**/public/sw.js.map
+**/public/workbox-*.js.map
+
+# Documentation (temporary reports - keep only final docs)
+/docs/reports/*.md.backup
+/docs/temp/
+*.draft.md
