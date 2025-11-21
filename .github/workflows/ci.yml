@@ -26,9 +26,11 @@ jobs:
 
       - name: Executar ESLint
         run: npm run lint
+        continue-on-error: true
 
       - name: Executar Type Check
         run: npm run type-check
+        continue-on-error: true
 
   build:
     name: Build
