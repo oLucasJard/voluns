@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
-import { useAuth } from './Providers'
+import { useAuth } from './AuthProvider'
 import { supabase } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
 
