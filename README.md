@@ -13,7 +13,7 @@
 
 ### 1. Instalação
 ```bash
-git clone <repository>
+git clone https://github.com/oLucasJard/voluns.git
 cd voluns
 npm install
 ```
@@ -21,31 +21,46 @@ npm install
 ### 2. Configuração
 ```bash
 cp env.example .env.local
-# Configure suas variáveis de ambiente
+# Configure suas variáveis de ambiente do Supabase:
+# NEXT_PUBLIC_SUPABASE_URL=https://seu-projeto.supabase.co
+# NEXT_PUBLIC_SUPABASE_ANON_KEY=sua-anon-key
+# SUPABASE_SERVICE_ROLE_KEY=sua-service-role-key
 ```
 
-### 3. Executar
+### 3. Criar Usuários de Teste
 ```bash
-npm run dev
+npm run create-test-users
+```
+⚠️ **IMPORTANTE:** Execute este comando antes de usar o sistema pela primeira vez!
+
+### 4. Executar
+```bash
+npm run dev -- -p 5000
 ```
 
-Acesse: **http://localhost:3000**
+Acesse: **http://localhost:5000**
 
 ---
 
 ## 🔐 Credenciais de Teste
 
-### Administrador
+### ⚠️ Primeiro: Criar Usuários no Supabase
+Execute antes de fazer login:
+```bash
+npm run create-test-users
+```
+
+### 👑 Administrador
 - **Email:** `teste@voluns.com`
 - **Senha:** `Teste@2024`
 - **Acesso:** Completo ao sistema
 
-### Líder de Ministério
+### 👥 Líder de Ministério
 - **Email:** `lider@voluns.com`
 - **Senha:** `Teste@2024`
 - **Acesso:** Gerencia ministérios e escalas
 
-### Voluntário
+### ✅ Voluntário
 - **Email:** `voluntario@voluns.com`
 - **Senha:** `Teste@2024`
 - **Acesso:** Visualiza escalas e confirma participação

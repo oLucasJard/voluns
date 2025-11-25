@@ -1,13 +1,10 @@
 // Theme script - carrega antes do React para evitar flash
 (function() {
-  const getTheme = () => {
-    const stored = localStorage.getItem('theme')
-    if (stored) return stored
-    
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  try {
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  } catch (e) {
+    // Fallback silencioso se localStorage não disponível
   }
-
-  const theme = getTheme()
-  document.documentElement.classList.add(theme)
 })()
 

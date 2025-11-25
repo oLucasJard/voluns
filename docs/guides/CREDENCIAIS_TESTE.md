@@ -213,9 +213,25 @@ transition-all hover:shadow-md
 
 ## 🧪 Como Testar
 
+### ⚠️ IMPORTANTE: Criar Usuários de Teste no Supabase
+
+Antes de usar as credenciais de teste, você PRECISA criá-las no banco de dados do Supabase:
+
+```bash
+npm run create-test-users
+```
+
+Este comando irá:
+- ✅ Criar a igreja de teste
+- ✅ Criar os 3 usuários (admin, líder, voluntário)
+- ✅ Criar os perfis associados
+- ✅ Criar ministério de exemplo
+
+**Se você receber erro 400 ao fazer login**, significa que os usuários não foram criados no Supabase. Execute o comando acima!
+
 ### 1. Acesse a Página de Login
 ```
-http://localhost:3000/auth/login
+http://localhost:5000/auth/login
 ```
 
 ### 2. Teste Acesso Rápido
@@ -223,11 +239,25 @@ http://localhost:3000/auth/login
 2. Veja o toast: "Credenciais preenchidas!"
 3. Verifique que os campos foram preenchidos
 4. Clique em "Entrar"
-5. Você será redirecionado para `/dashboard/admin`
+5. Você será redirecionado para `/dashboard`
 
 ### 3. Teste Outros Perfis
-- **Líder:** Clique em "Acesso Rápido" → Vai para `/dashboard/leader`
-- **Voluntário:** Clique em "Acesso Rápido" → Vai para `/dashboard/volunteer`
+- **Líder:** Clique em "Acesso Rápido" → Vai para `/dashboard`
+- **Voluntário:** Clique em "Acesso Rápido" → Vai para `/dashboard`
+
+### 4. Problemas Comuns
+
+#### Erro 400 - Bad Request
+**Causa:** Usuários de teste não existem no Supabase  
+**Solução:** Execute `npm run create-test-users`
+
+#### Erro: "Email ou senha inválidos"
+**Causa:** Credenciais incorretas ou usuários não criados  
+**Solução:** Verifique se executou o script de criação
+
+#### Erro de Conexão
+**Causa:** Variáveis de ambiente do Supabase não configuradas  
+**Solução:** Configure `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY` no `.env.local`
 
 ---
 

@@ -27,7 +27,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
 
 async function createTestUser() {
   try {
-    console.log('🚀 Criando usuário de teste...')
+    console.log('🚀 Criando usuários de teste...\n')
     
     // Verificar se a igreja de teste já existe
     const churchId = '550e8400-e29b-41d4-a716-446655440000'
@@ -39,7 +39,7 @@ async function createTestUser() {
     
     let church
     if (existingChurch) {
-      console.log('✅ Igreja de teste já existe')
+      console.log('✅ Igreja de teste já existe\n')
       church = existingChurch
     } else {
       // Criar igreja de teste
@@ -59,77 +59,126 @@ async function createTestUser() {
         return
       }
       church = newChurch
-      console.log('✅ Igreja criada:', church.name)
+      console.log('✅ Igreja criada:', church.name, '\n')
     }
 
-    // Criar usuário de teste
-    const { data: authData, error: authError } = await supabase.auth.admin.createUser({
-      email: 'teste@voluns.com',
-      password: 'Teste@2024',
-      email_confirm: true,
-      user_metadata: {
-        name: 'Usuário Teste',
-        role: 'admin'
-      }
-    })
-
-    if (authError) {
-      console.error('❌ Erro ao criar usuário:', authError)
-      return
-    }
-
-    console.log('✅ Usuário de autenticação criado:', authData.user.email)
-
-    // Criar perfil do usuário
-    const { error: profileError } = await supabase
-      .from('users')
-      .insert({
-        id: authData.user.id,
+    // Usuários de teste
+    const testUsers = [
+      {
         email: 'teste@voluns.com',
-        name: 'Usuário Teste',
+        password: 'Teste@2024',
+        name: 'Admin Teste',
         role: 'admin',
-        church_id: church.id
+        label: '👑 Administrador'
+      },
+      {
+        email: 'lider@voluns.com',
+        password: 'Teste@2024',
+        name: 'Líder Teste',
+        role: 'leader',
+        label: '👥 Líder de Ministério'
+      },
+      {
+        email: 'voluntario@voluns.com',
+        password: 'Teste@2024',
+        name: 'Voluntário Teste',
+        role: 'volunteer',
+        label: '✅ Voluntário'
+      }
+    ]
+
+    let ministryId = null
+
+    for (const user of testUsers) {
+      console.log(`\n🔄 Criando ${user.label}...`)
+
+      // Criar usuário de autenticação
+      const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+        email: user.email,
+        password: user.password,
+        email_confirm: true,
+        user_metadata: {
+          name: user.name,
+          role: user.role
+        }
       })
 
-    if (profileError) {
-      console.error('❌ Erro ao criar perfil:', profileError)
-      return
+      if (authError) {
+        if (authError.message.includes('already')) {
+          console.log(`⚠️  Usuário ${user.email} já existe, pulando...`)
+          continue
+        }
+        console.error('❌ Erro ao criar usuário:', authError)
+        continue
+      }
+
+      console.log('   ✅ Autenticação criada:', authData.user.email)
+
+      // Criar perfil do usuário
+      const { error: profileError } = await supabase
+        .from('users')
+        .insert({
+          id: authData.user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+          church_id: church.id
+        })
+
+      if (profileError && !profileError.message.includes('duplicate')) {
+        console.error('   ❌ Erro ao criar perfil:', profileError)
+        continue
+      }
+
+      console.log('   ✅ Perfil criado')
+
+      // Se for o admin, criar ministério
+      if (user.role === 'admin' && !ministryId) {
+        const { data: ministry, error: ministryError } = await supabase
+          .from('ministries')
+          .insert({
+            church_id: church.id,
+            name: 'Ministério de Louvor',
+            description: 'Ministério responsável pela música e louvor',
+            leader_id: authData.user.id
+          })
+          .select()
+          .single()
+
+        if (ministryError && !ministryError.message.includes('duplicate')) {
+          console.error('   ❌ Erro ao criar ministério:', ministryError)
+        } else if (ministry) {
+          ministryId = ministry.id
+          console.log('   ✅ Ministério criado:', ministry.name)
+        }
+      }
     }
 
-    console.log('✅ Perfil do usuário criado')
-
-    // Criar ministério de teste
-    const { data: ministry, error: ministryError } = await supabase
-      .from('ministries')
-      .insert({
-        church_id: church.id,
-        name: 'Ministério de Louvor',
-        description: 'Ministério responsável pela música e louvor',
-        leader_id: authData.user.id
-      })
-      .select()
-      .single()
-
-    if (ministryError) {
-      console.error('❌ Erro ao criar ministério:', ministryError)
-      return
-    }
-
-    console.log('✅ Ministério criado:', ministry.name)
-
-    console.log('')
-    console.log('🎉 Usuário de teste criado com sucesso!')
-    console.log('')
-    console.log('📧 Email: teste@voluns.com')
-    console.log('🔑 Senha: Teste@2024')
-    console.log('')
-    console.log('Agora você pode:')
-    console.log('1. Acessar http://localhost:3000/auth/login')
-    console.log('2. Fazer login com as credenciais acima')
-    console.log('3. Explorar o dashboard da aplicação')
+    console.log('\n\n🎉 Usuários de teste criados com sucesso!')
+    console.log('\n📋 CREDENCIAIS DE ACESSO:')
+    console.log('\n┌─────────────────────────────────────────────────┐')
+    console.log('│ 👑 ADMINISTRADOR                                │')
+    console.log('├─────────────────────────────────────────────────┤')
+    console.log('│ 📧 Email: teste@voluns.com                      │')
+    console.log('│ 🔑 Senha: Teste@2024                            │')
+    console.log('└─────────────────────────────────────────────────┘')
+    console.log('\n┌─────────────────────────────────────────────────┐')
+    console.log('│ 👥 LÍDER DE MINISTÉRIO                          │')
+    console.log('├─────────────────────────────────────────────────┤')
+    console.log('│ 📧 Email: lider@voluns.com                      │')
+    console.log('│ 🔑 Senha: Teste@2024                            │')
+    console.log('└─────────────────────────────────────────────────┘')
+    console.log('\n┌─────────────────────────────────────────────────┐')
+    console.log('│ ✅ VOLUNTÁRIO                                   │')
+    console.log('├─────────────────────────────────────────────────┤')
+    console.log('│ 📧 Email: voluntario@voluns.com                 │')
+    console.log('│ 🔑 Senha: Teste@2024                            │')
+    console.log('└─────────────────────────────────────────────────┘')
+    console.log('\n🌐 Acesse: http://localhost:5000/auth/login')
+    console.log('\n💡 Use o botão "Acesso Rápido" para preencher automaticamente!\n')
 
   } catch (error) {
-    console.error('❌ Erro geral:', error)
+    console.error('\n❌ Erro geral:', error)
   }
 }
 

@@ -19,16 +19,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                const theme = localStorage.getItem('theme') || 'light';
-                document.documentElement.classList.toggle('dark', theme === 'dark');
-              } catch (e) {}
-            `,
-          }}
-        />
+        <script src="/theme-script.js" />
       </head>
       <body className={inter.className}>
         <Providers>
