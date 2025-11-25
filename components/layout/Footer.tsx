@@ -1,177 +1,123 @@
 import Link from 'next/link'
+import type { SVGProps } from 'react'
+
+const footerNavigation = {
+  produto: [
+    { name: 'Recursos', href: '/recursos' },
+    { name: 'Planos', href: '/precos' },
+    { name: 'Clientes', href: '/test' },
+    { name: 'Status', href: '/status' },
+  ],
+  suporte: [
+    { name: 'Central de ajuda', href: '/help' },
+    { name: 'Documentação', href: '/docs' },
+    { name: 'Contato', href: '/contact' },
+    { name: 'Roadmap', href: '/roadmap' },
+  ],
+  empresa: [
+    { name: 'Sobre nós', href: '/about' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Carreiras', href: '/careers' },
+    { name: 'Licenças', href: '/licenses' },
+  ],
+  legal: [
+    { name: 'Privacidade', href: '/privacy' },
+    { name: 'Termos', href: '/terms' },
+    { name: 'Cookies', href: '/cookies' },
+  ],
+}
+
+const socialLinks = [
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com',
+    icon: (props: SVGProps<SVGSVGElement>) => (
+      <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zm7.5 0h3.8v2.11h.05c.53-1 1.83-2.11 3.77-2.11 4.03 0 4.78 2.66 4.78 6.11V24h-4v-6.74c0-1.61-.03-3.68-2.24-3.68-2.24 0-2.58 1.75-2.58 3.56V24h-4V8.5z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Instagram',
+    href: 'https://www.instagram.com',
+    icon: (props: SVGProps<SVGSVGElement>) => (
+      <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M7 2C4.238 2 2 4.238 2 7v10c0 2.762 2.238 5 5 5h10c2.762 0 5-2.238 5-5V7c0-2.762-2.238-5-5-5H7zm10 2a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h10zm-5 2.5A4.5 4.5 0 107 11a4.5 4.5 0 005-4.5zm0 2A2.5 2.5 0 119.5 11 2.5 2.5 0 0112 8.5zm4.75-2.75a1 1 0 11-1 1 1 1 0 011-1z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'YouTube',
+    href: 'https://www.youtube.com',
+    icon: (props: SVGProps<SVGSVGElement>) => (
+      <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M21.8 8.001a2.752 2.752 0 00-1.94-1.952C18.58 5.667 12 5.667 12 5.667s-6.58 0-7.86.382A2.752 2.752 0 002.2 8.001 28.43 28.43 0 002 12a28.43 28.43 0 00.2 3.999 2.752 2.752 0 001.94 1.952c1.28.382 7.86.382 7.86.382s6.58 0 7.86-.382a2.752 2.752 0 001.94-1.952A28.43 28.43 0 0022 12a28.43 28.43 0 00-.2-3.999zM10 14.667V9.333L15 12l-5 2.667z" />
+      </svg>
+    ),
+  },
+]
 
 export function Footer() {
-  const navigation = {
-    main: [
-      { name: 'Recursos', href: '/recursos' },
-      { name: 'Preços', href: '/precos' },
-      { name: 'Depoimentos', href: '/depoimentos' },
-      { name: 'Contato', href: '/contact' },
-    ],
-    support: [
-      { name: 'Central de Ajuda', href: '/help' },
-      { name: 'Documentação', href: '/docs' },
-      { name: 'Status', href: '/status' },
-      { name: 'Contato', href: '/contact' },
-    ],
-    company: [
-      { name: 'Sobre', href: '/about' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Carreiras', href: '/careers' },
-      { name: 'Imprensa', href: '/press' },
-    ],
-    legal: [
-      { name: 'Privacidade', href: '/privacy' },
-      { name: 'Termos', href: '/terms' },
-      { name: 'Cookies', href: '/cookies' },
-      { name: 'Licenças', href: '/licenses' },
-    ],
-    social: [
-      {
-        name: 'Facebook',
-        href: '#',
-        icon: (props: any) => (
-          <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-            <path
-              fillRule="evenodd"
-              d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-              clipRule="evenodd"
-            />
-          </svg>
-        ),
-      },
-      {
-        name: 'Instagram',
-        href: '#',
-        icon: (props: any) => (
-          <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-            <path
-              fillRule="evenodd"
-              d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987c6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.244c-.875.807-2.026 1.297-3.323 1.297zm7.83-9.781H7.721v6.24h8.558V7.207z"
-              clipRule="evenodd"
-            />
-          </svg>
-        ),
-      },
-      {
-        name: 'Twitter',
-        href: '#',
-        icon: (props: any) => (
-          <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-          </svg>
-        ),
-      },
-      {
-        name: 'YouTube',
-        href: '#',
-        icon: (props: any) => (
-          <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-            <path
-              fillRule="evenodd"
-              d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
-              clipRule="evenodd"
-            />
-          </svg>
-        ),
-      },
-    ],
-  }
-
   return (
-    <footer className="bg-gray-900 dark:bg-gray-950" aria-labelledby="footer-heading">
-      <h2 id="footer-heading" className="sr-only">
-        Footer
-      </h2>
-      <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-8">
+    <footer className="bg-gray-900 text-gray-300">
+      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-3">
+          <div className="space-y-4">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 bg-primary-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-gray-900 font-semibold text-xl">
+                V
               </div>
-              <span className="text-xl font-bold text-white">Voluns</span>
+              <span className="text-xl font-semibold text-white">Voluns</span>
             </Link>
-            <p className="text-sm leading-6 text-gray-300 dark:text-gray-400">
-              A plataforma mais completa para gestão de voluntários e escalas ministeriais. 
-              Elimine o caos e organize sua igreja de forma inteligente.
+            <p className="text-sm text-gray-400">
+              Plataforma de classe mundial para igrejas modernas. Organize voluntários, crie escalas inteligentes e mantenha sua comunidade engajada em todos os canais.
             </p>
-            <div className="flex space-x-6">
-              {navigation.social.map((item) => (
+            <div className="flex space-x-4">
+              {socialLinks.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-400 hover:text-gray-300 dark:text-gray-500 dark:hover:text-gray-400 transition-colors duration-200"
+                  className="text-gray-400 transition-colors duration-200 hover:text-white"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <span className="sr-only">{item.name}</span>
-                  <item.icon className="h-6 w-6" aria-hidden="true" />
+                  <item.icon className="h-6 w-6" />
                 </a>
               ))}
             </div>
           </div>
-          <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Produto</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.main.map((item) => (
-                    <li key={item.name}>
-                      <a
-                        href={item.href}
-                        className="text-sm leading-6 text-gray-300 hover:text-white dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200"
-                      >
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-white">Suporte</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.support.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-sm leading-6 text-gray-300 hover:text-white dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+
+          <div className="lg:col-span-2">
+            <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+              {Object.entries(footerNavigation).map(([group, links]) => (
+                <div key={group}>
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-white">{group}</h3>
+                  <ul role="list" className="mt-4 space-y-3 text-sm">
+                    {links.map((item) => (
+                      <li key={item.name}>
+                        <Link
+                          href={item.href}
+                          className="text-gray-400 transition-colors duration-200 hover:text-white"
+                        >
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Empresa</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.company.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-sm leading-6 text-gray-300 hover:text-white dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-white">Legal</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.legal.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-sm leading-6 text-gray-300 hover:text-white dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div                                                                                                                                                                                                                                                                                                                                             
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-white/10 pt-8 text-sm text-gray-500">
+          <p>&copy; {new Date().getFullYear()} Voluns. Todos os direitos reservados.</p>
+          <p className="mt-2 text-xs text-gray-500">
+            Construído com foco em acessibilidade, desempenho e excelência operacional. Referência em UX inspirada por Uber, iFood e 99.
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}
